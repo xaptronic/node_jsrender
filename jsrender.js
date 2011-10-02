@@ -2,7 +2,22 @@
 /*
  * Optimized version of jQuery Templates, for rendering to string, using 'codeless' markup.
  */
-window.JsViews || window.jQuery && jQuery.views || (function( window, undefined ) {
+var environment = {};
+
+switch (true) {
+	// in a browser
+	case typeof window != 'undefined':
+		environment = window;
+		break;
+	// nodejs
+	case typeof global != 'undefined':
+		environment = global;
+		break;
+	// what else / we don't know
+	default:
+		throw new Exception("Ohoh!");
+}
+(environment.JsViews || environment.jQuery && jQuery.views) || (function( window, undefined ) {
 
 var $, viewsNs, tmplEncode, render,
 	FALSE = false, TRUE = true,
@@ -38,7 +53,6 @@ if ( jQuery ) {
 	});
 
 } else {
-
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	// jQuery is not loaded. Make $ the JsViews object
 	window.JsViews = window.$ = $ = {
@@ -273,7 +287,10 @@ $.extend({
 				result += viewsNs.activeViews ? "<!--item-->" + content + "<!--/item-->" : content;
 			}
 		} else {
+			//console.log('before call');
+			//console.log(this);
 			result += tmpl( data, View( context, path, parentView, data, tmpl ));
+			//process.exit();
 		}
 
 		return viewsNs.activeViews
@@ -537,6 +554,7 @@ function buildTmplFunction( nodes ) {
 			endsInPlus = TRUE;
 		}
 	}
+	
 	ret = new Function( "$data, $view", code.slice( 0, endsInPlus ? -1 : -8 ) + ";\nreturn result;" );
 	ret.nested = nested;
 	return ret;
@@ -567,4 +585,8 @@ function try$( selector ) {
 	return selector;
 }
 
-})( window );
+})( environment );
+
+if (typeof module != 'undefined') {
+	module.exports = environment.JsViews;
+}
