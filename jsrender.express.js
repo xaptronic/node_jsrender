@@ -7,6 +7,10 @@ jsrender.views.registerTags({
 	"layout": function () {
 //		return this.data.layout();
 		return "call layout..";
+	},
+	// allow serverside templates to contain templates for clientside use
+	"tmpl": function (content) {
+		return jsrender.render(content).replace('{%','{{').replace('%}','}}');
 	}
 });
 
