@@ -4,9 +4,8 @@ jsrender.views.registerTags({
 	"partial": function (path, opts) {
 		return this.data.partial(path, opts || {});
 	},
-	"layout": function () {
-//		return this.data.layout();
-		return "call layout..";
+	"layout": function (path) {
+		this.data.layout(path);
 	},
 	// allow serverside templates to contain templates for clientside use
 	"tmpl": function (content) {
