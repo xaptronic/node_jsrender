@@ -1,5 +1,5 @@
 {
-  "name": "jsrender",
+  "name": "node_jsrender",
   "version": "0.1.0",
   "description": "NodeJS port of JsRender: http://borismoore.github.com/jsrender/demos",
   "homepage": "https://github.com/alex-pilon/node_jsrender",
