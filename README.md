@@ -9,7 +9,7 @@ See also [JsViews step-by-step samples](http://borismoore.github.com/jsviews/dem
 After you clone this module with npm or git:
 
 *// server.js*
-```
+```js
 var jsrender = require('jsrender');
 
 process.on('start', function () {
@@ -21,7 +21,7 @@ process.on('start', function () {
 ```
 
 Yields:
-```
+```html
 &lt;h4&gt;Hello World&lt;/h4&gt;
 ```
 
@@ -30,7 +30,7 @@ Yields:
 But who _isn't_ using express these days?
 
 *// server.js*
-```
+```js
 var jsrender = require('jsrender');
 var express = require('express');
 
