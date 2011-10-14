@@ -8,56 +8,53 @@ See also [JsViews step-by-step samples](http://borismoore.github.com/jsviews/dem
 
 After you clone this module with npm or git:
 
-*// server.js*
-```js
-var jsrender = require('jsrender');
+**// server.js**
 
-process.on('start', function () {
-  jsrender.template("yourtemplate", "{{=myvar}}");
-  var result = jsrender.render("yourtemplate", {myvar:"Hello World!"});
-  
-  console.log(result);
-});
-```
+    var jsrender = require('jsrender');
+
+    process.on('start', function () {
+      jsrender.template("yourtemplate", "{{=myvar}}");
+      var result = jsrender.render("yourtemplate", {myvar:"Hello World!"});
+      
+      console.log(result);
+    });
 
 Yields:
-```html
-&lt;h4&gt;Hello World&lt;/h4&gt;
-```
+
+    &lt;h4&gt;Hello World&lt;/h4&gt;
 
 ### With Express
 
 But who _isn't_ using express these days?
 
-*// server.js*
-```js
-var jsrender = require('jsrender');
-var express = require('express');
+**// server.js**
 
-var app = express.createServer();
+    var jsrender = require('jsrender');
+    var express = require('express');
 
-// TODO Make sure this is right
-app.register('jsrender', jsrender.express);
+    var app = express.createServer();
 
-app.set("view options", { layout: false });
+    // TODO Make sure this is right
+    app.register('jsrender', jsrender.express);
 
-app.get('/', function (req, res) {
-  var data = {people:[{name:"Alex",age:23},{name:"Waldo",age:34}],things:"Render all the things!"};
-  res.render('index.jsrender', {meta: {title: "List of stuff"}, data: data});
-});
+    app.set("view options", { layout: false });
 
-app.listen(8080);
-```
+    app.get('/', function (req, res) {
+      var data = {people:[{name:"Alex",age:23},{name:"Waldo",age:34}],things:"Render all the things!"};
+      res.render('index.jsrender', {meta: {title: "List of stuff"}, data: data});
+    });
 
-// index.jsrender
-```
+    app.listen(8080);
+
+
+**// index.jsrender**
+
 {{=meta.title}}
 
-People!
-{{#each data.people}}
-  {{=name}} is {{=age}}
-{{/each}}
-```
+    People!
+    {{#each data.people}}
+      {{=name}} is {{=age}}
+    {{/each}}
 
 
 ### Partials
@@ -65,20 +62,19 @@ People!
 // TODO In the partial tag if an array of objects is passed in then loop over them with partial..?
 Refactoring the above index.jsrender template (pretending that we have a complex view of people data):
 
-*// index.jsrender*
-```
-{{=meta.title}}
+**// index.jsrender**
 
-People!
-{{#each data.people}}
-  {{partial name=name age=age}}
-{{/each}}
-```
+    {{=meta.title}}
 
-*// person.jsrender*
-```
-{{=name}} is {{=age}}
-```
+    People!
+    {{#each data.people}}
+      {{partial name=name age=age}}
+    {{/each}}
+
+**// person.jsrender**
+
+    {{=name}} is {{=age}}
+
 
 ### Layout
 
@@ -90,39 +86,41 @@ This section demonstrates two features;
 
 First lets take the above example express server and remove the nonsense about not using a layout:
 
-*// server.js*
-```var jsrender = require('jsrender');
-var express = require('express');
+**// server.js**
 
-var app = express.createServer();
+    var jsrender = require('jsrender');
+    var express = require('express');
 
-// TODO Make sure this is right
-app.register('jsrender', jsrender.express);
+    var app = express.createServer();
 
-// no more turn off layout
+    // TODO Make sure this is right
+    app.register('jsrender', jsrender.express);
 
-app.get('/', function (req, res) {
-  var data = {people:[{name:"Alex",age:23},{name:"Waldo",age:34}],things:"Render all the things!"};
-  res.render('index.jsrender', {meta: {title: "List of stuff"}, data: data});
-});
+    // no more turn off layout
 
-app.listen(8080);```
+    app.get('/', function (req, res) {
+      var data = {people:[{name:"Alex",age:23},{name:"Waldo",age:34}],things:"Render all the things!"};
+      res.render('index.jsrender', {meta: {title: "List of stuff"}, data: data});
+    });
 
-*// layout.jsrender*
-```TODO: How does this get here.. can a template pass variables to the layout using something like a block?
-{{=body}}```
+    app.listen(8080);
+
+**// layout.jsrender**
+
+    TODO: How does this get here.. can a template pass variables to the layout using something like a block?
+    {{=body}}
 
 The layout template automatically receives a variable called body which contains the rendered result of the content template, e.g.; index.js
 
-*// index.js*
-```My Interesting Observations about Niches
-This is my content section where I detail something very interesting about a very niche subject.  
+**// index.js**
+    My Interesting Observations about Niches
+    This is my content section where I detail something very interesting about a very niche subject.  
 
-Favorite Links
+    Favorite Links
 
-NodeJS
-jQuery
-Other great new technologies```
+    NodeJS
+    jQuery
+    Other great new technologies
 
 #### The layout tag
     
@@ -139,18 +137,16 @@ In a server template, {% and %} will be converted to {{ and }} respectively.
 
 // TODO Remove the tmpl tag and put the tag conversion in the compile method.
 
-*// index.js*
-```
-This is a template. This is my variable: {%=myvariable%}
-A quick example of using templatable templates.
-```
+**// index.js**
+
+    This is a template. This is my variable: {%=myvariable%}
+    A quick example of using templatable templates.
 
 Once this is rendered the output returned will look like
 
-*// index.js (rendered)*
-```
-This is a template. This is my variable: {{=myvariable}}
-```
+**// index.js (rendered)**
+
+    This is a template. This is my variable: {{=myvariable}}
 
 This inline template is now ready to be used on the client.
 
