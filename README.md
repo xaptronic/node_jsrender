@@ -9,25 +9,29 @@ See also [JsViews step-by-step samples](http://borismoore.github.com/jsviews/dem
 After you clone this module with npm or git:
 
 *// server.js*
-```var jsrender = require('jsrender');
+```
+var jsrender = require('jsrender');
 
 process.on('start', function () {
   jsrender.template("yourtemplate", "{{=myvar}}");
   var result = jsrender.render("yourtemplate", {myvar:"Hello World!"});
   
   console.log(result);
-});```
+});
+```
 
 Yields:
-
+```
 &lt;h4&gt;Hello World&lt;/h4&gt;
+```
 
 ### With Express
 
 But who _isn't_ using express these days?
 
 *// server.js*
-```var jsrender = require('jsrender');
+```
+var jsrender = require('jsrender');
 var express = require('express');
 
 var app = express.createServer();
@@ -42,15 +46,18 @@ app.get('/', function (req, res) {
   res.render('index.jsrender', {meta: {title: "List of stuff"}, data: data});
 });
 
-app.listen(8080);```
+app.listen(8080);
+```
 
 // index.jsrender
-```{{=meta.title}}
+```
+{{=meta.title}}
 
 People!
 {{#each data.people}}
   {{=name}} is {{=age}}
-{{/each}}```
+{{/each}}
+```
 
 
 ### Partials
@@ -59,15 +66,19 @@ People!
 Refactoring the above index.jsrender template (pretending that we have a complex view of people data):
 
 *// index.jsrender*
-```{{=meta.title}}
+```
+{{=meta.title}}
 
 People!
 {{#each data.people}}
   {{partial name=name age=age}}
-{{/each}}```
+{{/each}}
+```
 
 *// person.jsrender*
-```{{=name}} is {{=age}}```
+```
+{{=name}} is {{=age}}
+```
 
 ### Layout
 
@@ -129,13 +140,17 @@ In a server template, {% and %} will be converted to {{ and }} respectively.
 // TODO Remove the tmpl tag and put the tag conversion in the compile method.
 
 *// index.js*
-```This is a template. This is my variable: {%=myvariable%}
-A quick example of using templatable templates.```
+```
+This is a template. This is my variable: {%=myvariable%}
+A quick example of using templatable templates.
+```
 
 Once this is rendered the output returned will look like
 
 *// index.js (rendered)*
-```This is a template. This is my variable: {{=myvariable}}```
+```
+This is a template. This is my variable: {{=myvariable}}
+```
 
 This inline template is now ready to be used on the client.
 
