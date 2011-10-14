@@ -7,10 +7,6 @@ jsrender.views.registerTags({
 	"layout": function (path) {
 		this.data.layout(path);
 	},
-	// allow serverside templates to contain templates for clientside use
-	"tmpl": function (content) {
-		return jsrender.render(content).replace('{%','{{').replace('%}','}}');
-	}
 });
 
 exports.compile = function (markup, options) {
@@ -24,6 +20,9 @@ exports.compile = function (markup, options) {
 	jsrender.template(name, markup);
 
 	return function render(locals) {
-		return jsrender.render(name, locals);
+		return jsrender
+		    .render(name, locals)
+		    .replace('{%','{{')
+		    .replace('%}','}}');
 	};
 };
