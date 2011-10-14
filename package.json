@@ -1,12 +1,12 @@
 {
   "name": "jsrender",
   "version": "0.1.0",
-  "description": "NodeJS port of JsRender: http://borismoore.github.com/jsrender/demos"
+  "description": "NodeJS port of JsRender: http://borismoore.github.com/jsrender/demos",
   "homepage": "https://github.com/alex-pilon/node_jsrender",
   "keywords": ["templating","views engine","express"],
   "author": "Ported by Alex Pilon, originally written by Boris Moore (and team)",
   "repository":{
-    "type": "git"
+    "type": "git",
     "url": "git://github.com/alex-pilon/node_jsrender.git"
   },
   "engines": {
