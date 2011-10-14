@@ -21,7 +21,7 @@ After you clone this module with npm or git:
 
 Yields:
 
-    &lt;h4&gt;Hello World&lt;/h4&gt;
+    <h4>Hello World</h4>;
 
 ### With Express
 
@@ -49,7 +49,7 @@ But who _isn't_ using express these days?
 
 **// index.jsrender**
 
-{{=meta.title}}
+    {{=meta.title}}
 
     People!
     {{#each data.people}}
