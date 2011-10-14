@@ -8,6 +8,10 @@ See also [JsViews step-by-step samples](http://borismoore.github.com/jsviews/dem
 
 After you clone this module with npm or git:
 
+git clone git://github.com/alex-pilon/node_jsrender.git
+OR
+npm install node_jsrender
+
 **// server.js**
 
     var jsrender = require('jsrender');
