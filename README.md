@@ -1,4 +1,4 @@
-# JsRender: Next generation jQuery NodeJS Templates
+# JsRender: Next generation <strike>jQuery</strike> NodeJS Templates
 Optimized for high-performance pure string-based rendering, without DOM or jQuery hassle dependency. (Current version - "codeless" tag syntax)
 
 Original demos: [http://borismoore.github.com/jsrender/demos/step-by-step/index.html](http://borismoore.github.com/jsrender/demos/step-by-step/index.html).
